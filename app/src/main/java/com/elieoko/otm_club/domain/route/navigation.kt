@@ -1,27 +1,24 @@
-package com.partners.hdfils_agent.domain.route
+package com.elieoko.otm_club.domain.route
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.partners.hdfils_agent.presentation.ui.pages.AuthPage
-import com.partners.hdfils_agent.presentation.ui.pages.HomePage
-import com.partners.hdfils_agent.presentation.ui.pages.HomePageMain
-import com.partners.hdfils_agent.presentation.ui.pages.InscriptionPage
-
+import com.elieoko.otm_club.presentation.ui.pages.MainPage
+import com.elieoko.otm_club.presentation.ui.pages.auth.LoginPage
+import com.elieoko.otm_club.presentation.ui.pages.auth.RegisterPage
 
 @Composable
 fun Navigation(navC: NavHostController){
-    NavHost(navController = navC, startDestination = ScreenRoute.Home.name, route = "root") {
-        composable(ScreenRoute.Auth.name) {
-            AuthPage(navC)
+    NavHost(navController = navC, startDestination = ScreenRoute.AuthLogin.name, route = "root") {
+        composable(ScreenRoute.AuthLogin.name) {
+            LoginPage(navC)
+        }
+        composable(ScreenRoute.AuthRegister.name) {
+            RegisterPage(navC)
         }
         composable(ScreenRoute.Home.name) {
-            HomePageMain(navC)
-        }
-        composable(ScreenRoute.Client.name) {
-            InscriptionPage()
+            MainPage(navC)
         }
     }
-
 }

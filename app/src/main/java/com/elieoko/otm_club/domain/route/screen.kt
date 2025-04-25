@@ -1,9 +1,7 @@
-package com.partners.hdfils_agent.domain.route
+package com.elieoko.otm_club.domain.route
 
 enum class ScreenRoute {
-    Auth,
-    Home,
-    Client,
-    Cleaner,
-    Profil
+    AuthLogin,
+    AuthRegister,
+    Home
 }
