@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
@@ -18,9 +17,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -32,19 +31,23 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.elieoko.otm_club.presentation.ui.components.Label
 import com.elieoko.otm_club.presentation.ui.components.MButtonIcon
 import com.elieoko.otm_club.presentation.ui.components.MTextField
 import com.elieoko.otm_club.presentation.ui.components.Space
 import com.elieoko.otm_club.R
+import com.elieoko.otm_club.domain.route.ScreenRoute
+import kotlinx.coroutines.launch
 
 @Composable
-fun LoginPage(){
-    LoginPageBody()
+fun LoginPage(navC: NavHostController) {
+    LoginPageBody(navC)
 }
 
 @Composable
-fun LoginPageBody(){
+fun LoginPageBody(navC: NavHostController? = null) {
+    val scope = rememberCoroutineScope()
     val rainbowColorsBrush = remember {
         Brush.sweepGradient(
             listOf(
@@ -66,24 +69,40 @@ fun LoginPageBody(){
                     .fillMaxWidth().padding(0.dp),
                 shape = RoundedCornerShape(bottomEnd = 45.dp, bottomStart = 45.dp),
                 colors = CardDefaults.cardColors(
-                    containerColor = Color(0xff7494ec).copy(0.7f)
+                    containerColor = Color(0xFF3F51B5).copy(0.7f)
                 )) {
                 Column(Modifier.padding(30.dp).fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
                     Label("Bienvenue, dans le club d'informatique", color = Color.White, size = 28, fontFamily = FontFamily.Serif, fontWeight = FontWeight.Bold)
                     Space(y=8)
                     Label("N'aviez vous pas un compte ?", size = 18, fontFamily = FontFamily.Serif)
                     Space(y=18)
-                    MButtonIcon(backgroundColor = Color(0xff7494ec), click = {}, icon = {}, label = "S'enregistrer", textColor = Color.White)
+                    MButtonIcon(backgroundColor = Color(0xff7494ec), click = {
+                        scope.launch {
+                            navC?.navigate(route = ScreenRoute.AuthRegister.name){
+                                popUpTo(navC.graph.id){
+                                    inclusive = true
+                                }
+                            }
+                        }
+                    }, icon = {}, label = "S'enregistrer", textColor = Color.White)
                 }
             }
             Column(Modifier.padding(20.dp)) {
                 Label("Rejoignez votre communaute OTM", color = Color.Black, size = 25, fontFamily = FontFamily.Serif, fontWeight = FontWeight.Bold)
                 Space(y = 23)
-                MTextField(title = "Telephone")
+                MTextField(title = "Telephone", iconStart = R.drawable.phone_)
                 Space(y=10)
-                MTextField(title = "Mot de passe")
+                MTextField(title = "Mot de passe", iconStart = R.drawable.password)
                 Space(y=35)
-                MButtonIcon(modifier = Modifier.fillMaxWidth(),backgroundColor = Color(0xff7494ec), click = {}, icon = {}, label = "Connexion", textColor = Color.White)
+                MButtonIcon(modifier = Modifier.fillMaxWidth(),backgroundColor = Color(0xff7494ec), click = {
+                    scope.launch {
+                        navC?.navigate(route = ScreenRoute.Home.name){
+                            popUpTo(navC.graph.id){
+                                inclusive = true
+                            }
+                        }
+                    }
+                }, icon = {}, label = "Connexion", textColor = Color.White)
             }
         }
         Column(Modifier.fillMaxSize(), verticalArrangement = Arrangement.Bottom) {
@@ -113,12 +132,13 @@ fun LoginPageBody(){
                         )
                 )
             }
-
+            Space(y=58)
         }
     }
 }
 @Composable
 @Preview
 fun LoginPagePreview(){
+
     LoginPageBody()
 }

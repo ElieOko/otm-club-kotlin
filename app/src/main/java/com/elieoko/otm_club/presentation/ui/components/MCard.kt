@@ -4,13 +4,19 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CardElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
@@ -87,6 +93,72 @@ fun CardCustomBorderColor(
                     color = colorBorder.right
                 )
             }
+        }
+    }
+}
+
+
+@Composable
+fun ElegantBorderCard(
+    modifier: Modifier = Modifier,
+    width: Int = 358,
+    height: Int = 200,
+    colorBorder: BorderColorPosition = BorderColorPosition(),
+    strokeWidth: StrokeWidthPosition = StrokeWidthPosition(),
+    shapeFigure: Shape = RoundedCornerShape(24.dp),
+    cardColor: Color = Color.White.copy(alpha = 0.6f),
+    elevation: CardElevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
+    content: @Composable BoxScope.() -> Unit
+) {
+    Card(
+        modifier = modifier
+            .size(width.dp, height.dp)
+            .shadow(8.dp, shapeFigure)
+            .clip(shapeFigure),
+        elevation = elevation,
+        shape = shapeFigure,
+        colors = CardDefaults.cardColors(containerColor = cardColor)
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(cardColor)
+                .padding(16.dp)
+                .drawBehind {
+                    val canvasWidth = size.width
+                    val canvasHeight = size.height
+
+                    // bottom
+                    drawLine(
+                        color = colorBorder.bottom,
+                        start = Offset(0f, canvasHeight),
+                        end = Offset(canvasWidth, canvasHeight),
+                        strokeWidth = strokeWidth.bottom
+                    )
+                    // top
+                    drawLine(
+                        color = colorBorder.top,
+                        start = Offset(0f, 0f),
+                        end = Offset(canvasWidth, 0f),
+                        strokeWidth = strokeWidth.top
+                    )
+                    // left
+                    drawLine(
+                        color = colorBorder.left,
+                        start = Offset(0f, 0f),
+                        end = Offset(0f, canvasHeight),
+                        strokeWidth = strokeWidth.left
+                    )
+                    // right
+                    drawLine(
+                        color = colorBorder.right,
+                        start = Offset(canvasWidth, 0f),
+                        end = Offset(canvasWidth, canvasHeight),
+                        strokeWidth = strokeWidth.right
+                    )
+                }
+        ) {
+            content()
         }
     }
 }
