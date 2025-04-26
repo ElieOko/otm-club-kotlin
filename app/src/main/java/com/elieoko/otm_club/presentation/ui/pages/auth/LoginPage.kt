@@ -58,10 +58,10 @@ fun LoginPageBody(navC: NavHostController? = null) {
             )
         )
     }
-    Column(Modifier.fillMaxSize().background(Color.White)) {
+    Column(Modifier.fillMaxSize().background(Color(0xFF25262C))) {
         Column(
             modifier = Modifier
-                .background(color = Color.White)
+                .background(color = Color(0xFF25262C))
                 .verticalScroll(rememberScrollState())
         ) {
             Card(
@@ -69,14 +69,14 @@ fun LoginPageBody(navC: NavHostController? = null) {
                     .fillMaxWidth().padding(0.dp),
                 shape = RoundedCornerShape(bottomEnd = 45.dp, bottomStart = 45.dp),
                 colors = CardDefaults.cardColors(
-                    containerColor = Color(0xFF3F51B5).copy(0.7f)
+                    containerColor = Color(0xFF14161E).copy(0.7f)
                 )) {
                 Column(Modifier.padding(30.dp).fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
                     Label("Bienvenue, dans le club d'informatique", color = Color.White, size = 28, fontFamily = FontFamily.Serif, fontWeight = FontWeight.Bold)
                     Space(y=8)
                     Label("N'aviez vous pas un compte ?", size = 18, fontFamily = FontFamily.Serif)
                     Space(y=18)
-                    MButtonIcon(backgroundColor = Color(0xff7494ec), click = {
+                    MButtonIcon(backgroundColor = Color(0xFFFFC107), click = {
                         scope.launch {
                             navC?.navigate(route = ScreenRoute.AuthRegister.name){
                                 popUpTo(navC.graph.id){
@@ -88,13 +88,17 @@ fun LoginPageBody(navC: NavHostController? = null) {
                 }
             }
             Column(Modifier.padding(20.dp)) {
-                Label("Rejoignez votre communaute OTM", color = Color.Black, size = 25, fontFamily = FontFamily.Serif, fontWeight = FontWeight.Bold)
+                Label("Rejoignez votre communaute OTM", color = Color.White, size = 25, fontFamily = FontFamily.Serif, fontWeight = FontWeight.Bold)
                 Space(y = 23)
-                MTextField(title = "Telephone", iconStart = R.drawable.phone_)
+                MTextField(title = "Telephone", iconStart = R.drawable.phone_, colorUniversalBorder = Color(
+                    0xFFD79840
+                ).copy(0.7f))
                 Space(y=10)
-                MTextField(title = "Mot de passe", iconStart = R.drawable.password)
+                MTextField(title = "Mot de passe", iconStart = R.drawable.password, colorUniversalBorder = Color(
+                    0xFFD79840
+                ).copy(0.7f))
                 Space(y=35)
-                MButtonIcon(modifier = Modifier.fillMaxWidth(),backgroundColor = Color(0xff7494ec), click = {
+                MButtonIcon(modifier = Modifier.fillMaxWidth(),backgroundColor = Color(0xFFFFC107), click = {
                     scope.launch {
                         navC?.navigate(route = ScreenRoute.Home.name){
                             popUpTo(navC.graph.id){

@@ -39,18 +39,18 @@ fun RegisterPage(navC: NavHostController) {
 @Composable
 fun RegisterPageBody(navC: NavHostController? = null) {
     val scope = rememberCoroutineScope()
-    Column(Modifier.background(Color.White)) {
+    Column(Modifier.background(Color(0xFF25262C))) {
         Column(Modifier.padding(20.dp).fillMaxWidth()) {
             Space(y = 12)
             Text(
                 buildAnnotatedString {
                     append("Developpe ")
-                    withStyle(style = SpanStyle(color = Color.Blue.copy(0.4f),fontFamily = FontFamily.Serif)) {
+                    withStyle(style = SpanStyle(color = Color.Gray.copy(0.4f),fontFamily = FontFamily.Serif)) {
                         append("HardSkills")
                     }
                     append(" & ")
 
-                    withStyle(style = SpanStyle(fontWeight = FontWeight.Bold, color = Color.Red.copy(0.4f),fontFamily = FontFamily.Serif)) {
+                    withStyle(style = SpanStyle(fontWeight = FontWeight.Bold, color = Color.Gray.copy(0.4f),fontFamily = FontFamily.Serif)) {
                         append("SoftSkills")
                     }
                     append(" des maintenants avec ")
@@ -59,24 +59,35 @@ fun RegisterPageBody(navC: NavHostController? = null) {
                     }
                 },
                 fontSize = 25.sp,
-                fontFamily = FontFamily.Serif
+                fontFamily = FontFamily.Serif,
+                color = Color.White
             )
             Space(y = 10)
-            MTextField(title = "Nom")
+            MTextField(title = "Nom", colorUniversalBorder = Color(
+                0xFFD79840
+            ).copy(0.7f))
             Space(y=5)
-            MTextField(title = "Prenom")
+            MTextField(title = "Prenom", colorUniversalBorder = Color(
+                0xFFD79840
+            ).copy(0.7f))
             Space(y=5)
-            MTextField(title = "Telephone")
+            MTextField(title = "Telephone", colorUniversalBorder = Color(
+                0xFFD79840
+            ).copy(0.7f))
             Space(y=5)
-            MTextField(title = "Status Actuel")
+            MTextField(title = "Status Actuel", colorUniversalBorder = Color(
+                0xFFD79840
+            ).copy(0.7f))
             Space(y=5)
-            MTextField(title = "Mot de passe")
+            MTextField(title = "Mot de passe", colorUniversalBorder = Color(
+                0xFFD79840
+            ).copy(0.7f))
             Space(y=18)
-            MButtonIcon(modifier = Modifier.fillMaxWidth(),backgroundColor = Color(0xff7494ec), click = {}, icon = {}, label = "S'enregistrer", textColor = Color.White)
+            MButtonIcon(modifier = Modifier.fillMaxWidth(),backgroundColor = Color(0xFFFFC107), click = {}, icon = {}, label = "S'enregistrer", textColor = Color.White)
         }
         Column(
             modifier = Modifier.fillMaxSize()
-                .background(color = Color.White),
+                .background(color = Color(0xFF25262C)),
             horizontalAlignment = Alignment.End,
             verticalArrangement = Arrangement.Bottom
         ) {
@@ -85,7 +96,7 @@ fun RegisterPageBody(navC: NavHostController? = null) {
                     .fillMaxWidth().padding(0.dp),
                 shape = RoundedCornerShape(topEnd = 45.dp, topStart = 45.dp),
                 colors = CardDefaults.cardColors(
-                    containerColor = Color(0xFF3F51B5).copy(0.7f)
+                    containerColor = Color(0xFF14161E).copy(0.7f)
                 )) {
                 Column(Modifier.padding(30.dp).fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
                     Label("Bienvenue, dans le club d'informatique", color = Color.White, size = 28, fontFamily = FontFamily.Serif, fontWeight = FontWeight.Bold)
@@ -93,7 +104,7 @@ fun RegisterPageBody(navC: NavHostController? = null) {
                     Label("Aviez vous un compte ?", size = 18, fontFamily = FontFamily.Serif)
                     Space(y=18)
                     //0xff7494ec
-                    MButtonIcon(backgroundColor = Color(0xff7494ec), click = {
+                    MButtonIcon(backgroundColor = Color(0xFFFFC107), click = {
                         scope.launch {
                             navC?.navigate(route = ScreenRoute.AuthLogin.name){
                                 popUpTo(navC.graph.id){
