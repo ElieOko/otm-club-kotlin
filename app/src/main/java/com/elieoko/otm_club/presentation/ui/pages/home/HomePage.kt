@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -71,7 +72,7 @@ fun HomePageBody(){
         Item("Architecture",R.drawable.architecture),
         )
     val state = rememberScrollState()
-    Column() {
+    Column(Modifier.background(Color(0xFF25262C))) {
         ModernPage()
         //MyClassesScreen()
 //        Column(Modifier.padding(13.dp)) {
@@ -486,7 +487,7 @@ fun ITClubTeamsPage() {
             name = "Mobile",
             description = "L’équipe mobile développe des applications Android et iOS modernes.",
             techStack = listOf("Jetpack Compose", "SwiftUI", "Flutter"),
-            imageRes = R.drawable.phone_
+            imageRes = R.drawable.phone
         ),
         TeamInfo(
             name = "Reseaux",
@@ -529,7 +530,7 @@ fun ITClubTeamsPage() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFF9FAFB))
+            .background(Color(0xFF25262C))
             .padding(6.dp)
     ) {
         Column(modifier = Modifier
@@ -563,11 +564,10 @@ fun ITClubTeamsPage() {
 fun TeamCard(team: TeamInfo) {
     Card(
         shape = RoundedCornerShape(16.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
+        colors = CardDefaults.cardColors(containerColor =Color(0xFFE0E7FF).copy(0.4f)),
         modifier = Modifier
             .fillMaxWidth()
-            .shadow(1.dp, RoundedCornerShape(16.dp))
+
     ) {
         Row(modifier = Modifier.padding(16.dp)) {
             Image(
@@ -590,7 +590,7 @@ fun TeamCard(team: TeamInfo) {
                 Text(
                     text = team.description,
                     fontSize = 14.sp,
-                    color = Color(0xFF6B7280),
+                    color = Color(0xFF111827),
                     maxLines = 4
                 )
                 Spacer(modifier = Modifier.height(8.dp))
@@ -749,7 +749,9 @@ fun HomePageClub() {
 fun ModernPage() {
     val state = rememberScrollState()
     Column(modifier = Modifier
-        .padding(4.dp)
+        .fillMaxHeight()
+        .fillMaxSize()
+        .background(Color(0xFF25262C))
     ) {
         // Titre de bienvenue
        Column(Modifier.padding(14.dp)) {
