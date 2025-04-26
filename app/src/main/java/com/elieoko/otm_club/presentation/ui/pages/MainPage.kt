@@ -55,6 +55,8 @@ fun MainPage(navC: NavHostController) {
     val route = listOf<Item>(Item("home",R.drawable.home), Item("Equipe",R.drawable.team), Item("Activite",R.drawable.architecture), Item("Contact",R.drawable.assist))
     var position by remember { mutableIntStateOf(0) }
     Scaffold(
+        containerColor = Color(0xFF25262C),
+        contentColor = Color.White,
         bottomBar = {
             Box(
                 modifier = Modifier
@@ -99,7 +101,7 @@ fun MainPage(navC: NavHostController) {
             }
         }
     ) {
-        Column(Modifier.verticalScroll(state)) {
+        Column(Modifier.verticalScroll(state).background(Color(0xFF25262C))) {
             Box {
                 Image(
                     painter = painterResource(id = R.drawable.hec_studeny),
